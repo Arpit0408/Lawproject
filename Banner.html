@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Law Firm Dashboard">
+    <meta name="Author" content="Your Name">
+    <meta name="keywords" content="law, dashboard, admin panel, responsive">
+
+    <!-- TITLE -->
+    <title>Adv. Ganesh</title>
+
+    <!-- BOOTSTRAP CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ICONS CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <style>
+        /* Header Styles */
+        .app-header {
+            background-color: #fff;
+            border-bottom: 1px solid #eaeaea;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Sidebar Styles */
+        .app-sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #343a40;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .app-sidebar.active {
+            left: 0;
+        }
+  li{
+    list-style-type: none;
+    font-size: 1.2rem;
+  }
+        .app-sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .header-content-right {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .app-sidebar {
+                width: 200px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .app-sidebar {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="header-logo">
+                <h1>Adv. Ganesh</h1>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+        <!-- END HEADER -->
+
+        <!-- SIDEBAR -->
+        <aside class="app-sidebar" id="sidebar">
+            <div class="header-logo">
+                <h2 style="text-align:center; padding-top: 2rem;">Adv. Ganesh</h2>
+            </div>
+            <nav class="main-menu-container">
+                <ul class="main-menu">
+                    <li><a href="dashboard.html">Dashboards</a></li>
+                    <li><a href="Banner.html">Banner Image</a></li>
+                    <li><a href="blogcreates.html">Blog</a></li>
+                    <li><a href="Vedio.html">Video Gallery</a></li>
+                    <li><a href="image.html">Image Gallery</a></li>
+                    <li><a href="Review.html">Add Review</a></li>
+
+                </ul>
+            </nav>
+        </aside>
+        <!-- END SIDEBAR -->
+            <!-- MAIN-CONTENT -->
+
+            <div class="main-content app-content">
+
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card custom-card">
+                                <div class="card-header justify-content-between">
+                                    <div class="card-title">
+                                        Image File
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                                        <input type="file" class="form-control" id="inputGroupFile01" name="image_file" >
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-wave">Upload</button>
+                                </div>
+                                <div class="card-footer d-none border-top-0">
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </form>
+                <script>
+                  document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the form from submitting the traditional way
+    
+    const formData = new FormData();
+    const videoFile = document.getElementById('inputGroupFile01').files[0];
+    
+    if (videoFile) {
+        formData.append('image_file', videoFile); // Corrected to 'video_file' to match the form's file input name
+        
+        fetch('https://advocategvadmin.advgvdeshmukh.com/banner.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text()) // Use text() to capture the entire response
+        .then(text => {
+            console.log('Response Text:', text); // Log the raw response for debugging
+            try {
+                const data = JSON.parse(text); // Try to parse as JSON
+                if (data.success) {
+                    // alert('Video uploaded successfully!');
+                } else {
+                    alert('Failed to upload video: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Parsing error:', error);
+                alert('Received unexpected response from the server.');
+            }
+        })
+        .catch(error => {
+            console.error('Network error:', error);
+            alert('An error occurred while uploading the video.');
+        });
+    } else {
+        alert('Please select a video file to upload.');
+    }
+});
+
+                    </script>
+                      
+
+
+<div class="table-responsive">
+    <table class="table text-nowrap">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+               
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody id="videoTableBody">
+            <!-- Data from the API will be inserted here -->
+        </tbody>
+    </table>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('https://advocategvadmin.advgvdeshmukh.com/bannerselct.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const tableBody = document.getElementById('videoTableBody');
+                data.data.forEach(video => {
+                    const row = document.createElement('tr');
+
+                    // Name
+                    const nameCell = document.createElement('th');
+                    nameCell.scope = 'row';
+                    nameCell.textContent = video.banner_image	;
+                    row.appendChild(nameCell);
+
+                  
+
+                    // Status (Delete Button)
+                    const statusCell = document.createElement('td');
+                    const statusBadge = document.createElement('span');
+                    statusBadge.className = 'btn btn-danger btn-wave';
+                    statusBadge.textContent = 'Delete';
+                    statusBadge.style.cursor = 'pointer';
+                    statusBadge.addEventListener('click', function() {
+                        deleteVideo(video.id, row); // Pass the video ID and the row element
+                    });
+                    statusCell.appendChild(statusBadge);
+                    row.appendChild(statusCell);
+
+                    // Append row to the table body
+                    tableBody.appendChild(row);
+                });
+            } else {
+                console.error('Failed to load data:', data.message);
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+});
+
+function deleteVideo(videoId, row) {
+    fetch('https://advocategvadmin.advgvdeshmukh.com/bannerdel.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: videoId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Remove the row from the table
+            row.remove();
+            // alert(data.message);
+        } else {
+            console.error('Failed to delete video:', data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+document.getElementById('hamburger').addEventListener('click', function () {
+                    document.getElementById('sidebar').classList.toggle('active');
+                });
+        
+</script>
+            </div>
+                    <!-- End:: row-3 -->
+
+                </div>
+
+
+            </div> 
+            <!-- END MAIN-CONTENT -->
+
+            <!-- SEARCH-MODAL -->
+
+         
+            <!-- END SEARCH-MODAL -->
+
+            <!-- FOOTER -->
+            
+            <footer class="footer mt-auto py-3 bg-white text-center">
+                <div class="container">
+                   
+                </div>
+            </footer>
+            <!-- END FOOTER -->
+
+		</div>
+        <!-- END PAGE-->
+
+        <!-- SCRIPTS -->
+
+        <!-- SCROLL-TO-TOP -->
+        <div class="scrollToTop">
+                <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
+        </div>
+        <div id="responsive-overlay"></div>
+
+        <!-- POPPER JS -->
+        <script src="build/assets/libs/%40popperjs/core/umd/popper.min.js"></script>
+
+        <!-- BOOTSTRAP JS -->
+        <script src="build/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- NODE WAVES JS -->
+        <script src="build/assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- SIMPLEBAR JS -->
+        <script src="build/assets/libs/simplebar/simplebar.min.js"></script>
+        <link rel="modulepreload" href="build/assets/simplebar-635bad04.js" /><script type="module" src="build/assets/simplebar-635bad04.js"></script>
+
+        <!-- COLOR PICKER JS -->
+        <script src="build/assets/libs/%40simonwep/pickr/pickr.es5.min.js"></script>
+        
+        <!-- PRISM JS -->
+        <script src="build/assets/libs/prismjs/prism.js"></script>
+        <link rel="modulepreload" href="build/assets/prism-custom-cc53504d.js" /><script type="module" src="build/assets/prism-custom-cc53504d.js"></script>
+    
+
+        <!-- STICKY JS -->
+		<script src="build/assets/sticky.js"></script>
+
+        <!-- APP JS -->
+		<link rel="modulepreload" href="build/assets/app-3cade095.js" /><script type="module" src="build/assets/app-3cade095.js"></script>
+
+        <!-- CUSTOM-SWITCHER JS -->
+        <link rel="modulepreload" href="build/assets/custom-switcher-383b6a5b.js" /><script type="module" src="build/assets/custom-switcher-383b6a5b.js"></script>
+        
+        <!-- END SCRIPTS -->
+
+	</body>
+
+</html>

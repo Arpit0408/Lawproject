@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Law Firm Dashboard">
+    <meta name="Author" content="Your Name">
+    <meta name="keywords" content="law, dashboard, admin panel, responsive">
+<!-- TinyMCE CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+
+    <!-- TITLE -->
+    <title>Adv. Ganesh</title>
+  <!-- BOOTSTRAP CSS -->
+  <link  id="style" href="build/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- ICONS CSS -->
+  <link href="build/assets/icon-fonts/icons.css" rel="stylesheet">
+  
+  <!-- APP SCSS -->
+  <link rel="preload" as="style" href="build/assets/app-fce3f544.css" /><link rel="stylesheet" href="build/assets/app-fce3f544.css" />
+
+  <!-- NODE WAVES CSS -->
+  <link href="build/assets/libs/node-waves/waves.min.css" rel="stylesheet"> 
+
+  <!-- SIMPLEBAR CSS -->
+  <link rel="stylesheet" href="build/assets/libs/simplebar/simplebar.min.css">
+
+  <!-- COLOR PICKER CSS -->
+  <link rel="stylesheet" href="build/assets/libs/flatpickr/flatpickr.min.css">
+  <link rel="stylesheet" href="build/assets/libs/%40simonwep/pickr/themes/nano.min.css">
+
+  <!-- CHOICES CSS -->
+  <link rel="stylesheet" href="build/assets/libs/choices.js/public/assets/styles/choices.min.css">
+
+  <!-- CHOICES JS -->
+  <script src="build/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+
+  <!-- MAIN JS -->
+  <script src="build/assets/main.js"></script>
+
+   <!-- Quill Editor CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+  <!-- QUILL CSS -->
+  <link rel="stylesheet" href="build/assets/libs/quill/quill.snow.css">
+  <link rel="stylesheet" href="build/assets/libs/quill/quill.bubble.css">
+
+  <!-- FILEPOND CSS -->
+  <link rel="stylesheet" href="build/assets/libs/filepond/filepond.min.css">
+  <link rel="stylesheet" href="build/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css">
+  <link rel="stylesheet" href="build/assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css">
+
+  <!-- DATE & TIME PICKER CSS -->
+  <link rel="stylesheet" href="build/assets/libs/flatpickr/flatpickr.min.css">
+
+   
+
+    <!-- CUSTOM CSS -->
+    <style>
+        /* Header Styles */
+        .app-header {
+            background-color: #fff;
+            border-bottom: 1px solid #eaeaea;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Sidebar Styles */
+        .app-sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #343a40;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .app-sidebar.active {
+            left: 0;
+        }
+  li{
+    list-style-type: none;
+    font-size: 1.2rem;
+  }
+        .app-sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .header-content-right {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .app-sidebar {
+                width: 200px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .app-sidebar {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="header-logo">
+                <h1>Adv. Ganesh</h1>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+        <!-- END HEADER -->
+
+        <!-- SIDEBAR -->
+        <aside class="app-sidebar" id="sidebar">
+            <div class="header-logo">
+                <h2 class="text-white" style="text-align:center; padding-top: 2rem;">Adv. Ganesh</h2>
+            </div>
+            <nav class="main-menu-container">
+                <ul class="main-menu">
+                    <li><a href="dashboard.html">Dashboards</a></li>
+                    <li><a href="Banner.html">Banner Image</a></li>
+                    <li><a href="blogcreates.html">Blog</a></li>
+                    <li><a href="Vedio.html">Video Gallery</a></li>
+                    <li><a href="image.html">Image Gallery</a></li>
+                    <li><a href="Review.html">Add Review</a></li>
+
+                </ul>
+            </nav>
+        </aside>
+        <!-- END SIDEBAR -->
+            <!-- MAIN-CONTENT -->
+
+            <div class="main-content app-content">
+
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="container-fluid" style="margin-top:15px;">
+                        <!-- Page Header -->
+                        <div class="d-md-flex d-block  align-items-center justify-content-between my-4 page-header-breadcrumb" >
+                            <h1 class="page-title fw-semibold fs-18 mb-0" style="margin-top:15px;">Create Blog</h1>
+                        </div>
+                        <!-- Page Header Close -->
+                
+                        <!-- Start::row -->
+                        <div class="row">
+                            <div class="card custom-card">
+                                <div class="card-header">
+                                    <div class="card-title">New Blog</div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row gy-3">
+                                        <div class="col-xl-12">
+                                            <label for="blog-title" class="form-label">Blog Title</label>
+                                            <input type="text" class="form-control" id="blog-title" name="title" placeholder="Blog Title">
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <label for="blog-category" class="form-label">Blog Category</label>
+                                            <input type="text" class="form-control" data-trigger name="category" id="blog-category">
+                                               
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <label for="blog-author" class="form-label">Blog Author</label>
+                                            <input type="text" class="form-control" id="blog-author" name="author" placeholder="Enter Name">
+                                        </div>
+                                        <div class="col-xl-6">
+                                            <label for="blog-author-email" class="form-label">Email</label>
+                                            <input type="text" class="form-control" id="blog-author-email" name="author_email" placeholder="Enter Email">
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <label class="form-label">Blog Content</label>
+                                            <textarea id="blog-content" name="content"></textarea>  <!-- TinyMCE will replace this -->
+                                        </div>
+                                        
+                                        <div class="col-xl-12 blog-images-container">
+                                            <label for="banner-image" class="form-label">Banner Image</label>
+                                            <input type="file" class="form-control" id="banner-image" name="banner" accept="image/*">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="btn-list text-end">
+                                        <button type="submit"class="btn btn-lg text-white " style="background-color: #343a40;">Post Blog</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End::row -->
+                    </div>
+                </form>
+                <!-- Quill Editor JS -->
+                <script>
+                    // Initialize CKEditor
+                    ClassicEditor
+                        .create(document.querySelector('#blog-content'), {
+                            placeholder: 'Enter blog content here...',
+                            toolbar: ['bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote']
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+            
+                    // Function to get the content from CKEditor
+                    function getContent() {
+                        var editor = document.querySelector('#blog-content').editorInstance;
+                        if (editor) {
+                            var content = editor.getData(); // Get the content from the editor
+                            console.log(content); // Log it to the console or send it somewhere
+                        }
+                    }
+                </script>
+
+
+                <script>
+                    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+                        e.preventDefault(); // Prevent the form from submitting the traditional way
+                    
+                        const formData = new FormData(this);
+                    
+                        fetch('https://advocategvadmin.advgvdeshmukh.com/blogadd.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // alert('Blog posted successfully!');
+                            } else {
+                                alert('Failed to post blog: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred while posting the blog.');
+                        });
+                    });
+                    </script>
+                    
+                    <div class="table-responsive">
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Author</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Created</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blogTableBody">
+                                <!-- Data from the API will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <script>
+                document.addEventListener("DOMContentLoaded", function() {
+    fetch('https://advocategvadmin.advgvdeshmukh.com/allblog.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const tableBody = document.getElementById('blogTableBody');
+                data.data.forEach(blog => {
+                    const row = document.createElement('tr');
+
+                    // Title
+                    const titleCell = document.createElement('th');
+                    titleCell.scope = 'row';
+                    titleCell.textContent = blog.title;
+                    row.appendChild(titleCell);
+
+                    // Category
+                    const categoryCell = document.createElement('td');
+                    categoryCell.textContent = blog.category;
+                    row.appendChild(categoryCell);
+
+                    // Author
+                    const authorCell = document.createElement('td');
+                    authorCell.textContent = blog.author;
+                    row.appendChild(authorCell);
+
+                    // Email
+                    const emailCell = document.createElement('td');
+                    emailCell.textContent = blog.author_email;
+                    row.appendChild(emailCell);
+
+                    // Created On
+                    const createdOnCell = document.createElement('td');
+                    createdOnCell.textContent = blog.created_at; // Adjust if necessary
+                    row.appendChild(createdOnCell);
+
+                    // Action (Delete Button)
+                    const actionCell = document.createElement('td');
+                    const deleteButton = document.createElement('span');
+                    deleteButton.className = 'btn btn-danger btn-wave';
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.style.cursor = 'pointer';
+                    deleteButton.addEventListener('click', function() {
+                        if (confirm('Are you sure you want to delete this blog?')) {
+                            deleteBlog(blog.id, row);
+                        }
+                    });
+                    actionCell.appendChild(deleteButton);
+                    row.appendChild(actionCell);
+
+                    // Append row to the table body
+                    tableBody.appendChild(row);
+                });
+            } else {
+                console.error('Failed to load data:', data.message);
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+});
+
+function deleteBlog(blogId, row) {
+    fetch('https://advocategvadmin.advgvdeshmukh.com/deleteblog.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: blogId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            row.remove(); // Remove the row from the table
+            // alert(data.message);
+        } else {
+            console.error('Failed to delete blog:', data.message);
+            alert('Failed to delete blog: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while deleting the blog.');
+    });
+}
+
+                    </script>
+            </div> 
+            <!-- END MAIN-CONTENT -->
+
+           
+
+            <!-- FOOTER -->
+            
+            <footer class="footer mt-auto py-3 bg-white text-center">
+                <div class="container">
+                  
+                </div>
+            </footer>
+            <!-- END FOOTER -->
+
+		</div>
+        <!-- END PAGE-->
+
+        <!-- SCRIPTS -->
+
+        <!-- SCROLL-TO-TOP -->
+        <div class="scrollToTop">
+                <span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
+        </div>
+        <div id="responsive-overlay"></div>
+
+        <!-- POPPER JS -->
+        <script src="build/assets/libs/%40popperjs/core/umd/popper.min.js"></script>
+
+        <!-- BOOTSTRAP JS -->
+        <script src="build/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- NODE WAVES JS -->
+        <script src="build/assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- SIMPLEBAR JS -->
+        <script src="build/assets/libs/simplebar/simplebar.min.js"></script>
+        <link rel="modulepreload" href="build/assets/simplebar-635bad04.js" /><script type="module" src="build/assets/simplebar-635bad04.js"></script>
+
+        <!-- COLOR PICKER JS -->
+        <script src="build/assets/libs/%40simonwep/pickr/pickr.es5.min.js"></script>
+        
+        <!-- DATE & TIME PICKER JS -->
+        <script src="build/assets/libs/flatpickr/flatpickr.min.js"></script>
+
+        <!-- QUILL EDITOR JS -->
+        <script src="build/assets/libs/quill/quill.min.js"></script>
+
+        <!-- FILEPOND JS -->
+        <script src="build/assets/libs/filepond/filepond.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js"></script>
+        <script src="build/assets/libs/filepond-plugin-image-transform/filepond-plugin-image-transform.min.js"></script>
+
+        <!-- INTERNAL CREATE BLOG JS -->
+        <link rel="modulepreload" href="build/assets/blog-create-8640480c.js" /><script type="module" src="build/assets/blog-create-8640480c.js"></script>
+
+
+        <!-- STICKY JS -->
+		<script src="build/assets/sticky.js"></script>
+
+        <!-- APP JS -->
+		<link rel="modulepreload" href="build/assets/app-3cade095.js" /><script type="module" src="build/assets/app-3cade095.js"></script>
+
+        <!-- CUSTOM-SWITCHER JS -->
+        <link rel="modulepreload" href="build/assets/custom-switcher-383b6a5b.js" /><script type="module" src="build/assets/custom-switcher-383b6a5b.js"></script>
+        
+
+	</body>
+
+</html>

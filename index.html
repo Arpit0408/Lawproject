@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light">
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Admin Login Page">
+    <title>Login</title>
+
+    <!-- FAVICON -->
+
+    <!-- BOOTSTRAP CSS -->
+    <link href="build/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- APP SCSS -->
+    <link rel="stylesheet" href="build/assets/app-fce3f544.css" />
+
+    <!-- MAIN JS -->
+    <script src="build/assets/authentication-main.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
+            <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
+                <div class="my-5 d-flex justify-content-center">
+                    <a href="index.html">
+                       <h4>ADV. GANESH V. DESHMUKH</h4>
+                    </a>
+                </div>
+                <div class="card custom-card">
+                    <div class="card-body p-5">
+                        <p class="h5 fw-semibold mb-2 text-center">Sign In</p>
+                        <div class="row gy-3">
+                            <div class="col-xl-12">
+                                <label for="signin-username" class="form-label text-default">User Name</label>
+                                <input type="text" class="form-control form-control-lg" id="signin-username" placeholder="user name" required>
+                            </div>
+                            <div class="col-xl-12 mb-2">
+                                <label for="signin-password" class="form-label text-default">Password</label>
+                                <input type="password" class="form-control form-control-lg" id="signin-password" placeholder="password" required>
+                            </div>
+                            <div class="col-xl-12 d-grid mt-2">
+                                <button class="btn btn-lg text-white " style="background-color: #343a40;" onclick="login()">Sign In</button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="build/assets/libs/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <script>
+        async function login() {
+            const username = document.getElementById('signin-username').value;
+            const password = document.getElementById('signin-password').value;
+
+            if (!username || !password) {
+                alert('Please enter both username and password.');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://advocategvadmin.advgvdeshmukh.com/login.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Assuming the API response includes a URL for redirection
+                    if (data.redirect) {
+                        window.location.href = data.redirect; // Redirect to the specified URL
+                    } else {
+                        // Example redirection to a default page after login
+                        window.location.href = 'dashboard.html'; // Change this to your desired URL
+                    }
+                } else {
+                    alert(data.error || 'Login failed. Please check your credentials.');
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again later.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Law Firm Dashboard">
+    <meta name="Author" content="Your Name">
+    <meta name="keywords" content="law, dashboard, admin panel, responsive">
+
+    <!-- TITLE -->
+    <title>Adv. Ganesh</title>
+
+    <!-- BOOTSTRAP CSS -->
+    <link id="style" href="build/assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ICONS CSS -->
+    <link href="build/assets/icon-fonts/icons.css" rel="stylesheet">
+
+    <!-- APP SCSS -->
+    <link rel="preload" as="style" href="build/assets/app-fce3f544.css" />
+    <link rel="stylesheet" href="build/assets/app-fce3f544.css" />
+
+    <!-- NODE WAVES CSS -->
+    <link href="build/assets/libs/node-waves/waves.min.css" rel="stylesheet">
+
+    <!-- SIMPLEBAR CSS -->
+    <link rel="stylesheet" href="build/assets/libs/simplebar/simplebar.min.css">
+
+    <!-- FONT AWESOME CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- CUSTOM CSS -->
+    <style>
+        /* Header Styles */
+        .app-header {
+            background-color: #fff;
+            border-bottom: 1px solid #eaeaea;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .hamburger {
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Sidebar Styles */
+        .app-sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #343a40;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .app-sidebar.active {
+            left: 0;
+        }
+
+        li {
+            list-style-type: none;
+            font-size: 1.2rem;
+        }
+
+        .app-sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .header-content-right {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .app-sidebar {
+                width: 200px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .main-content {
+                margin-left: 250px;
+            }
+
+            .app-sidebar {
+                left: 0;
+            }
+        }
+
+        /* Delete Button Styles */
+        .btn-delete {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="header-logo">
+                <h1>Adv. Ganesh</h1>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+        <!-- END HEADER -->
+
+        <!-- SIDEBAR -->
+        <aside class="app-sidebar" id="sidebar">
+            <div class="header-logo">
+                <h2 class="text-white" style="text-align:center; padding-top: 2rem;">Adv. Ganesh</h2>
+            </div>
+            <nav class="main-menu-container">
+                <ul class="main-menu">
+                    <li><a href="dashboard.html">Dashboards</a></li>
+                    <li><a href="Banner.html">Banner Image</a></li>
+                    <li><a href="blogcreates.html">Blog</a></li>
+                    <li><a href="Vedio.html">Video Gallery</a></li>
+                    <li><a href="image.html">Image Gallery</a></li>
+                    <li><a href="Review.html">Add Review</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- END SIDEBAR -->
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content app-content">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="container-fluid" style="margin-top:15px;">
+                    <!-- Page Header -->
+                    <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb"></div>
+                    <!-- Page Header Close -->
+            
+                    <!-- Start::row -->
+                    <div class="row">
+                        <div class="card custom-card">
+                            <div class="card-header">
+                                <div class="card-title">Add Review</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row gy-3">
+                                    <div class="col-xl-12">
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="name" name="fullname" placeholder="Name">
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <label class="form-label">Review</label>
+                                        <textarea class="form-control" id="review-content" name="review" rows="5" placeholder="Enter your review"></textarea>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <label class="form-label">Image</label>
+                                        <input type="file" class="form-control" id="image" name="image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="btn-list text-end">
+                                    <button type="submit" class="btn btn-lg text-white" style="background-color: #343a40;">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End::row -->
+                </div>
+            </form>
+            
+
+            <div class="container mt-4">
+                <h2>Existing Reviews</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Review</th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody id="blogTableBody">
+                            <!-- Reviews will be dynamically loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <script>
+              document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    var formData = new FormData(this); // Create FormData from the form
+
+    // Submit the form data to your PHP script using fetch
+    fetch('https://advocategvadmin.advgvdeshmukh.com/insertreview.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Review submitted successfully.');
+            loadReviews(); // Reload reviews after submission
+            document.getElementById('uploadForm').reset(); // Clear the form
+        } else {
+            alert('Error: ' + data.message); // Display error message if any
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error); // Log any errors
+        alert('An error occurred while submitting the review.');
+    });
+});
+                function loadReviews() {
+                    fetch('https://advocategvadmin.advgvdeshmukh.com/readreview.php')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success && Array.isArray(data.data)) {
+                                const tableBody = document.getElementById('blogTableBody');
+                                tableBody.innerHTML = ''; // Clear existing rows
+
+                                data.data.forEach(review => {
+                                    const row = document.createElement('tr');
+                                    row.innerHTML = `
+                                        <td>${review.name || 'N/A'}</td>
+                                        <td>${review.content || 'N/A'}</td>
+                                    `;
+                                    tableBody.appendChild(row);
+                                });
+
+                                // Add event listeners for delete buttons
+                                document.querySelectorAll('.btn-delete').forEach(button => {
+                                    button.addEventListener('click', function () {
+                                        const reviewId = this.getAttribute('data-id');
+                                        deleteReview(reviewId); // Pass the correct ID
+                                    });
+                                });
+                            } else {
+                                alert('Failed to load reviews.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred while fetching reviews.');
+                        });
+                }
+
+                function deleteReview(id) {
+                    if (!confirm('Are you sure you want to delete this review?')) {
+                        return; // Abort deletion if the user cancels
+                    }
+
+                    fetch('https://advocategvadmin.advgvdeshmukh.com/deleteblog.php', {
+                        method: 'POST',
+                        body: new URLSearchParams({ id: id })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Review deleted successfully.');
+                            loadReviews(); // Reload reviews after deletion
+                        } else {
+                            alert('Failed to delete review.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while deleting the review.');
+                    });
+                }
+
+                // Load reviews on page load
+                window.onload = function() {
+                    loadReviews();
+                };
+
+                // Sidebar toggle for mobile view
+                document.getElementById('hamburger').addEventListener('click', function () {
+                    document.getElementById('sidebar').classList.toggle('active');
+                });
+            </script>
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+</body>
+</html>
